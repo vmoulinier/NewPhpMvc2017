@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
+use App\Model\UserRepository;
 use Core\Controller\Controller;
-use App\Entity\User;
 
 class ProfilController extends Controller
 {
     public function profil() {
         $this->template = 'default';
-        $user = new User('1');
+        $userrepo = new UserRepository();
+        if(!$userrepo->islogged()){
+            $this->denied();
+        }
         $this->render('profil', compact('user'));
     }
 }

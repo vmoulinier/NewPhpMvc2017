@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'app/Autoload.php';
 require_once 'core/Autoload.php';
 

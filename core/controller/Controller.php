@@ -23,14 +23,9 @@ class Controller{
         require($this->path . 'templates/' . $this->template . '.php');
     }
 
-    protected function forbidden(){
-        header('HTTP/1.0 403 Forbidden');
-        die('Acces interdit');
-    }
-
-    protected function notFound(){
-        header('HTTP/1.0 404 Not Found');
-        die('Page introuvable');
+    protected function denied(){
+        $this->render('404',  compact(''));
+        die;
     }
 
 }
