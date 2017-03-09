@@ -9,7 +9,7 @@ use App\Model\UserRepository;
 
 class HomeController extends Controller
 {
-    public function home() {
+    public function index() {
         $this->template = 'default';
         $this->render('index', compact(''));
     }
