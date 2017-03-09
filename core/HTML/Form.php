@@ -51,8 +51,9 @@ class Form{
      */
     public function input($name, $label, $options = []){
         $type = isset($options['type']) ? $options['type'] : 'text';
+        $required = isset($options['required']) ? $options['required'] : 'true';
         return $this->surround(
-            '<input type="' . $type . '" name="' . $name . '" value="' . $this->getValue($name) . '">'
+            '<input type="' . $type . '" name="' . $name . '" value="' . $this->getValue($name) . '" required = "'. $required .'">'
         );
     }
 
