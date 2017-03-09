@@ -9,3 +9,4 @@
         </form>
     </div>
 </div>
+<p class="center red bold"><?php echo $error; ?></p>

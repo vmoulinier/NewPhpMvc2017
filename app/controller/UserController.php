@@ -17,24 +17,23 @@ class UserController extends Controller
 {
     public function login() {
         $this->template = 'default';
-
+        $error = ' ';
         $userrepo = new UserRepository();
 
         if(!empty($_POST)) {
-            var_dump($_POST);
             $email = $_POST['email'];
             $password = $_POST['password'];
             if($userrepo->login($email, $password)) {
-                header('Location: index.php?p=profil');
+                header('Location: index.php?p=user/profil');
             }
             else {
-                var_dump($userrepo->login($email, $password));
+                $error = 'Mauvais mail/mot de passe !';
             }
         }
 
         $form = new TemplateForm($_POST);
 
-        $this->render('login', compact('form', 'user'));
+        $this->render('user/login', compact('form', 'user', 'error'));
     }
 
     public function register() {
@@ -56,7 +55,7 @@ class UserController extends Controller
         }
 
         $form = new TemplateForm($_POST);
-        $this->render('register', compact('form', 'error'));
+        $this->render('user/register', compact('form', 'error'));
     }
 
     public function logout() {
@@ -71,6 +70,6 @@ class UserController extends Controller
         if(!$userrepo->islogged()){
             $this->denied();
         }
-        $this->render('profil', compact('user'));
+        $this->render('user/profil', compact('user'));
     }
 }

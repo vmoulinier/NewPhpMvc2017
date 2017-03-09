@@ -11,6 +11,6 @@ class HomeController extends Controller
 {
     public function index() {
         $this->template = 'default';
-        $this->render('index', compact(''));
+        $this->render('home/index');
     }
 }

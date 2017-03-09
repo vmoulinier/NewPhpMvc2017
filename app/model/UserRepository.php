@@ -52,8 +52,13 @@ class UserRepository
         $user = $req->fetch(\PDO::FETCH_OBJ);
         if($user){
             if($user->password == sha1($password)){
-                $this->saveSession($user->id);
-                return true;
+                if($user->type == 'ROLE_ADMIN'){
+                    $this->saveSessionAdmin($user->id, $user->type);
+                    return true;
+                } else {
+                    $this->saveSession($user->id);
+                    return true;
+                }
             }
         }
         return false;
@@ -63,12 +68,33 @@ class UserRepository
         $_SESSION['user_id'] = $id;
     }
 
+    public function saveSessionAdmin($id, $role) {
+        $_SESSION['user_id'] = $id;
+        $_SESSION['user_role'] = $role;
+    }
+
     public function islogged(){
-        return isset($_SESSION['user_id']);
+        if(isset($_SESSION['user_id'])) {
+            return true;
+        }
+    }
+
+    public function isloggedAdmin(){
+        if(isset($_SESSION['user_id']) and isset($_SESSION['user_role']) == 'ROLE_ADMIN') {
+            return true;
+        }
     }
 
     public static function logged() {
-        return isset($_SESSION['user_id']);
+        if(isset($_SESSION['user_id'])) {
+            return true;
+        }
+    }
+
+    public static function loggedAdmin() {
+        if(isset($_SESSION['user_id']) and isset($_SESSION['user_role']) == 'ROLE_ADMIN') {
+            return true;
+        }
     }
 
 }
