@@ -1,4 +1,11 @@
 <h2 class="center">Page Register</h2>
+<?php
+foreach ($langues as $langue) {
+    var_dump($langue->id) ;
+}
+
+var_dump($test->getNom());
+?>
 
 <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
@@ -8,6 +15,7 @@
             <?= $form->input('prenom', 'Prenom', ['type' => 'text']); ?>
             <?= $form->input('password', 'Mot de passe', ['type' => 'password']); ?>
             <?= $form->input('password_verif', 'Répeter le mot de passe', ['type' => 'password']); ?>
+            <?= $form->select('langue', 'Langue parlée', []); ?>
             <?= $form->submit('S\'enregistrer !'); ?>
         </form>
     </div>

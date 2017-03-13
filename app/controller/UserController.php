@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonces;
+use App\Model\Repository;
 use App\Model\UserRepository;
 use Core\Controller\Controller;
 use Core\HTML\TemplateForm;
@@ -32,15 +34,17 @@ class UserController extends Controller
         }
 
         $form = new TemplateForm($_POST);
-
         $this->render('user/login', compact('form', 'user', 'error'));
     }
 
     public function register() {
         $this->template = 'default';
         $userrepo = new UserRepository();
+        $repo = new Repository();
         $error = ' ';
-
+        $langues = $repo->findBy('langues', 'name', 'francais');
+        $test = $repo->test('user', 1);
+        
         if($userrepo->islogged()){
             $this->denied();
         }
@@ -55,7 +59,7 @@ class UserController extends Controller
         }
 
         $form = new TemplateForm($_POST);
-        $this->render('user/register', compact('form', 'error'));
+        $this->render('user/register', compact('form', 'error', 'langues', 'test'));
     }
 
     public function logout() {

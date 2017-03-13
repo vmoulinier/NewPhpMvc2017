@@ -32,6 +32,9 @@
                         <li><a href="<?= PATH ?>/admin/index">Admin</a></li>
                     <?php endif ?>
                     <li><a href="<?= PATH ?>/annonces/index">Annonces</a></li>
+                    <?php if(\App\Model\UserRepository::logged()): ?>
+                        <li><a href="<?= PATH ?>/annonces/create">Créer une annonce</a></li>
+                    <?php endif ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">

@@ -9,8 +9,10 @@
 namespace App\Controller;
 
 
+use App\Model\UserRepository;
 use Core\Controller\Controller;
 use App\Model\AnnoncesRepository;
+use Core\HTML\TemplateForm;
 
 class AnnoncesController extends Controller
 {
@@ -34,5 +36,33 @@ class AnnoncesController extends Controller
         }   else {
             $this->render('error/404');
         }
+    }
+    
+    public function create() {
+        $this->template = 'default';
+
+        $userrepo = new UserRepository();
+
+        if(!$userrepo->islogged()){
+            $this->denied();
+        }
+        
+        $user = \App\Model\Repository::getCurrentUser();
+        $repo = new AnnoncesRepository();
+        $form = new TemplateForm($_POST);
+
+        if(!empty($_POST)) {
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            if($repo->addAnnonce($title, $content, $user->getId())) {
+                setcookie("error", 'Annonce enregistrée', time()+5);
+                header('Location: '.PATH.'/annonces/create');
+            } else {
+                setcookie("error", 'Un problème est survenu', time()+5);
+                header('Location: '.PATH.'/annonces/create');
+            }
+        }
+
+        $this->render('annonces/create', compact('form', 'user', 'error'));
     }
 }

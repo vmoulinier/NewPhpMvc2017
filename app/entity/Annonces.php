@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 
+use App\Model\Repository;
 use App\Model\SPDO;
 
 class Annonces
@@ -116,8 +117,9 @@ class Annonces
     {
         $req = SPDO::getInstance()->prepare('SELECT * FROM user WHERE id = :id');
         $req->execute(array(':id' => $user_id));
-        $res = $req->fetch(\PDO::FETCH_OBJ);
-        $user = new User($res->id);
+        $res = $req->fetch();
+        $repo = new Repository();
+        $user = $repo->hydrate('user', $res);
         $this->user = $user;
     }
 }

@@ -17,23 +17,9 @@ class User
     private $password;
 
     private $email;
-
-    /**
-     * User constructor.
-     * @param $id
-     */
-    public function __construct($id)
+    
+    public function __construct()
     {
-        $stmt = SPDO::getInstance()->query('SELECT * FROM user WHERE id = '. $id);
-        $res = $stmt->fetch(\PDO::FETCH_OBJ);
-        if($res == true) {
-            $this->id = $res->id;
-            $this->nom = $res->nom;
-            $this->prenom = $res->prenom;
-            $this->email = $res->email;
-            $this->adresse = $res->id_adresse;
-            $this->password = $res->password;
-        }
         
     }
 

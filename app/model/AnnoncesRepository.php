@@ -37,7 +37,12 @@ class AnnoncesRepository
         }
     }
 
-    public function addAnnonce() {
-
+    public function addAnnonce($title, $content, $user_id) {
+        $req = SPDO::getInstance()->prepare('INSERT INTO annonces (title, content, user_id) VALUES (:title, :content, :user_id)');
+        $req->bindParam(':title', $title);
+        $req->bindParam(':content', $content);
+        $req->bindParam(':user_id', $user_id);
+        $req->execute();
+        return true;
     }
 }
