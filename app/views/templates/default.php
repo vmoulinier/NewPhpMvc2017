@@ -5,12 +5,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>AppMvcMouli</title>
-
-    <!-- Bootstrap cor CSS -->
-    <link href="public/css/bootstrap.css" rel="stylesheet">
-    <link href="public/css/styles.css" rel="stylesheet">
-    <script src="public/js/jquery-2.2.4.js"></script>
-    <script src="public/js/bootstrap.js"></script>
+    <link href="<?= PATH ?>/public/css/bootstrap.css" rel="stylesheet">
+    <link href="<?= PATH ?>/public/css/styles.css" rel="stylesheet">
+    <script src="<?= PATH ?>/public/js/jquery-2.2.4.js"></script>
+    <script src="<?= PATH ?>/public/js/bootstrap.js"></script>
     </head>
 <body>
 <div class="container">
@@ -23,16 +21,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="?p=home/index">PHPappMvc</a>
+                <a class="navbar-brand" href="<?= PATH ?>/home/index">PHPappMvc</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <?php if(\App\Model\UserRepository::logged()): ?>
-                    <li><a href="?p=user/profil">Profil</a></li>
+                    <li><a href="<?= PATH ?>/user/profil">Profil</a></li>
                     <?php endif ?>
                     <?php if(\App\Model\UserRepository::loggedAdmin()): ?>
-                        <li><a href="?p=admin/index">Admin</a></li>
+                        <li><a href="<?= PATH ?>/admin/index">Admin</a></li>
                     <?php endif ?>
+                    <li><a href="<?= PATH ?>/annonces/index">Annonces</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -48,16 +47,16 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if(\App\Model\UserRepository::logged()): ?>
-                    <li><a href="?p=user/logout">Deconnexion</a></li>
+                    <li><a href="<?= PATH ?>/user/logout">Deconnexion</a></li>
                     <?php else: ?>
-                    <li><a href="?p=user/register">S'enregistrer</a></li>
-                    <li><a href="?p=user/login">Connexion</a></li>
+                    <li><a href="<?= PATH ?>/user/register">S'enregistrer</a></li>
+                    <li><a href="<?= PATH ?>/user/login">Connexion</a></li>
                     <?php endif ?>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
     <h1 class="center">Template défaut</h1>
-    <?= $content; ?>
+    <?php echo $content; ?>
 </div>
 </body>

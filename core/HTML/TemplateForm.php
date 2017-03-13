@@ -2,21 +2,11 @@
 namespace Core\HTML;
 
 class TemplateForm extends Form{
-
-    /**
-     * @param $html string code HTML à entourer
-     * @return string
-     */
+    
     protected function surround($html){
         return "<div class=\"form-group\">{$html}</div>";
     }
-
-    /**
-     * @param $name string
-     * @param $label
-     * @param array $options
-     * @return string
-     */
+    
     public function input($name, $label, $options = []){
         $type = isset($options['type']) ? $options['type'] : 'text';
         $required = isset($options['required']) ? $options['required'] : 'true';
@@ -42,10 +32,7 @@ class TemplateForm extends Form{
         $input .= '</select>';
         return $this->surround($label . $input);
     }
-
-    /**
-     * @return string
-     */
+    
     public function submit($value){
         return $this->surround('<button type="submit" class="btn btn-primary">'.$value.'</button>');
     }

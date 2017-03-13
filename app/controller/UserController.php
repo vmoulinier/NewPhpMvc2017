@@ -24,7 +24,7 @@ class UserController extends Controller
             $email = $_POST['email'];
             $password = $_POST['password'];
             if($userrepo->login($email, $password)) {
-                header('Location: index.php?p=user/profil');
+                header('Location: '.PATH.'/user/profil');
             }
             else {
                 $error = 'Mauvais mail/mot de passe !';
@@ -61,7 +61,7 @@ class UserController extends Controller
     public function logout() {
         session_destroy();
         unset($_SESSION['user_id']);
-        header('Location: index.php?p=home/index');
+        header('Location: '.PATH.'/home/index');
     }
 
     public function profil() {

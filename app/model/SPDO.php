@@ -40,4 +40,9 @@ class SPDO
     {
         return $this->PDOInstance->prepare($query);
     }
+
+    public function lastInsertId()
+    {
+        return $this->PDOInstance->lastInsertId();
+    }
 }
