@@ -70,7 +70,7 @@ class UserRepository
 
     public function saveSessionAdmin($id, $role) {
         $_SESSION['user_id'] = $id;
-        $_SESSION['user_role'] = $role;
+        $_SESSION['user_role_admin'] = $role;
     }
 
     public function islogged(){
@@ -80,7 +80,7 @@ class UserRepository
     }
 
     public function isloggedAdmin(){
-        if(isset($_SESSION['user_id']) and isset($_SESSION['user_role']) == 'ROLE_ADMIN') {
+        if(isset($_SESSION['user_id']) and isset($_SESSION['user_role_admin']) == 'ROLE_ADMIN') {
             return true;
         }
     }
@@ -92,7 +92,7 @@ class UserRepository
     }
 
     public static function loggedAdmin() {
-        if(isset($_SESSION['user_id']) and isset($_SESSION['user_role']) == 'ROLE_ADMIN') {
+        if(isset($_SESSION['user_id']) and isset($_SESSION['user_role_admin']) == 'ROLE_ADMIN') {
             return true;
         }
     }

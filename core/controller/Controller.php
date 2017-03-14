@@ -2,16 +2,20 @@
 
 namespace Core\Controller;
 
+use App\Model\Repository;
+
 class Controller{
 
     protected $path;
     protected $template;
+    protected $repository;
 
     /**
      * Controller constructor.
      */
     public function __construct(){
         $this->path = 'app/views/';
+        $this->repository = new Repository();
     }
 
 

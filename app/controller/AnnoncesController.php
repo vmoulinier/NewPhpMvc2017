@@ -42,15 +42,14 @@ class AnnoncesController extends Controller
         $this->template = 'default';
 
         $userrepo = new UserRepository();
-
+        $repo = new AnnoncesRepository();
+        $form = new TemplateForm($_POST);
+        $user = $this->repository->getCurrentUser();
+        
         if(!$userrepo->islogged()){
             $this->denied();
         }
         
-        $user = \App\Model\Repository::getCurrentUser();
-        $repo = new AnnoncesRepository();
-        $form = new TemplateForm($_POST);
-
         if(!empty($_POST)) {
             $title = $_POST['title'];
             $content = $_POST['content'];

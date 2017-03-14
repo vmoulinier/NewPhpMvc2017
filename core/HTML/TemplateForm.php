@@ -9,12 +9,12 @@ class TemplateForm extends Form{
     
     public function input($name, $label, $options = []){
         $type = isset($options['type']) ? $options['type'] : 'text';
-        $required = isset($options['required']) ? $options['required'] : 'true';
+        $required = isset($options['required']) == 'false' ? ' ' : 'required';
         $label = '<label>' . $label . '</label>';
         if($type === 'textarea'){
-            $input = '<textarea name="' . $name . '" class="form-control"  required = "'. $required .'">' . $this->getValue($name) . '</textarea>';
+            $input = '<textarea name="' . $name . '" class="form-control" '. $required .'>' . $this->getValue($name) . '</textarea>';
         } else{
-            $input = '<input type="' . $type . '" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control"  required = "'. $required .'">';
+            $input = '<input type="' . $type . '" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control"  '. $required .'>';
         }
         return $this->surround($label . $input);
     }

@@ -11,9 +11,9 @@ namespace App\Model;
 
 class Repository
 {
-    public static function getCurrentUser() {
-        $id = $_SESSION['user_id'];
-        if($id) {
+    public function getCurrentUser() {
+        if(isset($_SESSION['user_id'])) {
+            $id = $_SESSION['user_id'];
             $req = SPDO::getInstance()->prepare('SELECT * FROM user WHERE id = "' . $id . '"');
             $req->execute();
             $res = $req->fetch();
@@ -52,7 +52,7 @@ class Repository
         return false;
     }
 
-    public function test($nomtable, $id){
+    public function findObjById($nomtable, $id){
         $req = SPDO::getInstance()->prepare('SELECT * FROM '.$nomtable.' WHERE id = "'.$id.'"');
         $req->execute();
         $res = $req->fetch(\PDO::FETCH_OBJ);
